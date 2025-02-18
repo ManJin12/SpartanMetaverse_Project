@@ -15,6 +15,7 @@ public class PlayerCollider : MonoBehaviour
         if (collision.gameObject.name == "Dungeon_1_DoorCollision")
         {
             transform.position = GameManager.Instance.Dungeon1_Point.position;
+            GameManager.Instance.Dungeon1_Object.SetActive(true);
             GameManager.Instance.isCameraTransitioning = true;
         }
     }

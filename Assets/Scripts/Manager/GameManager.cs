@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public GameObject Dungeon1_Object;
     public Transform Dungeon1_Point;
+
 
     public bool isCameraTransitioning = false;
     private void Awake()

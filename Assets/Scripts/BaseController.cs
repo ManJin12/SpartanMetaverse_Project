@@ -8,7 +8,7 @@ public class BaseController : MonoBehaviour
     [SerializeField] private SpriteRenderer CharacterRenderer;
     [SerializeField] private Transform weaponPivot;
 
-    [SerializeField] private int health = 100;
+    [SerializeField] public int health = 100;
     [SerializeField] private float moveSpeed = 3f;
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }

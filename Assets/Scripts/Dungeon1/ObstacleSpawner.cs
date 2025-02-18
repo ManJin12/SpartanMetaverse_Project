@@ -13,8 +13,6 @@ public class ObstacleSpawner : MonoBehaviour
     public Transform minRange;
     public Transform maxRange;
 
-
-
     void Update()
     {
         spawnTime += Time.deltaTime;

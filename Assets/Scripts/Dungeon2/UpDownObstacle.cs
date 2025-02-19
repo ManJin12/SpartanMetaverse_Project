@@ -25,7 +25,7 @@ public class UpDownObstacle : MonoBehaviour
         Vector3 placePosition = lastPositon + new Vector3(widthPadding, 0, 0);
         placePosition.y = Random.Range(lowPosY, highPosY);
 
-        transform.position = placePosition;
+        transform.localPosition = placePosition;
         return placePosition;
     }
     void Start()

@@ -15,8 +15,10 @@ public class BoomObstacle : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            AnimationHandler animationHandler = collision.gameObject.GetComponent<AnimationHandler>();
+            animationHandler.Damage();
             Debug.Log("게임 오버");
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject, 2f);
         }
 
         if(collision.gameObject.CompareTag("RemoveCollision"))

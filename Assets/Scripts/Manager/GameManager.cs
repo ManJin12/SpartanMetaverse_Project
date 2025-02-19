@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject Dungeon2_Object;
     public Transform Dungeon2_Point;
     public float offsetX;
+    public bool isDungeon2 = false;
 
 
     public bool isCameraTransitioning1 = false;

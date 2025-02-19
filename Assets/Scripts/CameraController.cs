@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     private Vector3 Dungeon2Transform;
+    private bool isDungeon2PositionSet = false;
+
 
 
 
@@ -53,12 +55,18 @@ public class CameraController : MonoBehaviour
 
     public void Dungeon2Move()
     {
-        transform.position = Dungeon2Transform;
-        GameManager.Instance.offsetX = transform.position.x - Target.position.x;
-
-        Vector3 pos = transform.position;
-        pos.x = Target.position.x + GameManager.Instance.offsetX;
-        transform.position = pos;
+        if (!isDungeon2PositionSet)
+        {
+            transform.position = Dungeon2Transform;
+            GameManager.Instance.offsetX = transform.position.x - Target.position.x;
+            isDungeon2PositionSet = true;
+        }
+        else
+        {
+            Vector3 pos = transform.position;
+            pos.x = Target.position.x + GameManager.Instance.offsetX;
+            transform.position = pos;
+        }
     }
 
     // Update is called once per frame

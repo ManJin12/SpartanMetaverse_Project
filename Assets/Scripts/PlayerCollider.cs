@@ -11,24 +11,29 @@ public class PlayerCollider : MonoBehaviour
     private bool isNearDoor = false; // 문 근처 여부
     private bool isOpenDoor = false; // 문 상태 (열림/닫힘)
 
+    Rigidbody2D rigid;
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
+        rigid = GetComponent<Rigidbody2D>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Dungeon_1_DoorCollision")
         {
-            transform.position = GameManager.Instance.Dungeon1_Point.position;
-            GameManager.Instance.Dungeon1_Object.SetActive(true);
-            GameManager.Instance.isCameraTransitioning1 = true;
+            transform.position = gameManager.Dungeon1_Point.position;
+            gameManager.Dungeon1_Object.SetActive(true);
+            gameManager.isCameraTransitioning1 = true;
         }
 
         if (collision.gameObject.name == "Dungeon_2_DoorCollision")
         {
-            transform.position = GameManager.Instance.Dungeon2_Point.position;
-            GameManager.Instance.Dungeon2_Object.SetActive(true);
-            GameManager.Instance.isCameraTransitioning2 = true;
+            transform.position = gameManager.Dungeon2_Point.position;
+            gameManager.Dungeon2_Object.SetActive(true);
+            gameManager.isCameraTransitioning2 = true;
+            gameManager.isDungeon2 = true;
+            rigid.gravityScale = 1;
         }
     }
 

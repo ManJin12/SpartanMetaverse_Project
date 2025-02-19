@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PlayerController : BaseController
 {
-    private GameManager gameManager;
-
     private Camera mainCamera;
 
     protected override void Awake()
     {
         base.Awake();
-        gameManager = GameManager.Instance;
-
     }
     // Start is called before the first frame update
     protected override void Start()

@@ -11,19 +11,11 @@ public class BoomObstacle : MonoBehaviour
         transform.Translate(Vector2.down * fallSpeed *  Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("RemoveCollision"))
         {
-            AnimationHandler animationHandler = collision.gameObject.GetComponent<AnimationHandler>();
-            animationHandler.Damage();
-            Debug.Log("게임 오버");
-            Destroy(collision.gameObject, 2f);
-        }
-
-        if(collision.gameObject.CompareTag("RemoveCollision"))
-        {
-            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }

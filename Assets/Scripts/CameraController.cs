@@ -6,7 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 public class CameraController : MonoBehaviour
 {
     GameManager gameManager;
-    CameraManager cameraManager;
     [SerializeField]
     private Transform Target;
 
@@ -58,13 +57,13 @@ public class CameraController : MonoBehaviour
         if (!isDungeon2PositionSet)
         {
             transform.position = Dungeon2Transform;
-            GameManager.Instance.offsetX = transform.position.x - Target.position.x;
+            gameManager.offsetX = transform.position.x - Target.position.x;
             isDungeon2PositionSet = true;
         }
         else
         {
             Vector3 pos = transform.position;
-            pos.x = Target.position.x + GameManager.Instance.offsetX;
+            pos.x = Target.position.x + gameManager.offsetX;
             transform.position = pos;
         }
     }
@@ -72,15 +71,15 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.isCameraTransitioning1 && !GameManager.Instance.isCameraTransitioning2)
+        if (!gameManager.isCameraTransitioning1 && !gameManager.isCameraTransitioning2)
         {
             MainCameraMoving();
         }
-        else if(GameManager.Instance.isCameraTransitioning1)
+        else if(gameManager.isCameraTransitioning1)
         {
             Dungeon1Move();
         }
-        else if(GameManager.Instance.isCameraTransitioning2)
+        else if(gameManager.isCameraTransitioning2)
         {
             Dungeon2Move();
         }

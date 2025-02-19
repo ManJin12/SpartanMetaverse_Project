@@ -15,8 +15,6 @@ public class BaseController : MonoBehaviour
     public float flapForce = 6f;
     public float forwardSpeed = 3f;
     public bool isDead = false;
-    float deathCooldown = 0f;
-
 
     bool isFlap = false;
     protected Vector2 movementDirection = Vector2.zero;
@@ -41,11 +39,22 @@ public class BaseController : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (gameManager.isDungeon2)
+        if (isDead)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            rigid.velocity = Vector2.zero;
+            return;
+        }
+            
+
+        if (gameManager.isDungeon2 )
+        {
+            if(gameManager.isGameStart2)
             {
-                isFlap = true;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    isFlap = true;
+                }
+                return;
             }
             return;
         }
@@ -55,9 +64,16 @@ public class BaseController : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
+        if (isDead)
+            return;
+
         if (gameManager.isDungeon2)
         {
-            Jump();
+            if (gameManager.isGameStart2)
+            {
+                Jump();
+                return;
+            }
             return;
         }
         MoveMent(movementDirection);

@@ -28,14 +28,4 @@ public class UpDownObstacle : MonoBehaviour
         transform.localPosition = placePosition;
         return placePosition;
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     GameManager gameManager;
+    public BgLooper bgLooper;
 
     public GameObject gameChat;
     public TextMeshProUGUI gameChatText;
@@ -56,7 +57,7 @@ public class UIManager : MonoBehaviour
 
         if (gameManager.isGameStart2)
         {
-            if (timer > Game1Maxtime)
+            if (timer > Game2Maxtime)
             {
                 Game2Maxtime = timer;
             }
@@ -76,12 +77,19 @@ public class UIManager : MonoBehaviour
             int maxseconds = Mathf.FloorToInt(Game1Maxtime % 60);
             maxGame1TimeTxt = string.Format("최고 기록 : {0:00} : {1:00}  현재 기록 : {2:00} : {3:00}", maxMinutes, maxseconds, minutes, seconds);
         }
-       
+        if (gameManager.isDungeon2)
+        {
+            int maxMinutes = Mathf.FloorToInt(Game2Maxtime / 60);
+            int maxseconds = Mathf.FloorToInt(Game2Maxtime % 60);
+            maxGame2TimeTxt = string.Format("최고 기록 : {0:00} : {1:00}  현재 기록 : {2:00} : {3:00}", maxMinutes, maxseconds, minutes, seconds);
+        }
+
         timeText.text = string.Format("{0:00} : {1:00} ", minutes, seconds);
     }
 
     public void Dungeon1Start()
     {
+        gameManager.playerTransform.position = gameManager.Dungeon1_Point.position;
         gameManager.isGameStart1 = true;
         dungeon1Btn.SetActive(false);
         gameChat.SetActive(false);
@@ -96,13 +104,21 @@ public class UIManager : MonoBehaviour
 
     public void Dungeon2Start()
     {
+        gameManager.playerTransform.position = gameManager.Dungeon2_Point.position;
+        gameManager.playerTransform.rotation = Quaternion.identity;
+        bgLooper.ResetPositions();
+        bgLooper.StartPositions();
+        gameManager.isDungeon2PositionSet = false;
         gameManager.isGameStart2 = true;
         dungeon2Btn.SetActive(false);
+        gameChat.SetActive(false);
         timer = 0f;
         PlayerController player = gameManager.Player.GetComponent<PlayerController>();
         player.isDead = false;
+        player.rigid.gravityScale = 1f;
         AnimationHandler anim = gameManager.Player.GetComponent<AnimationHandler>();
         anim.InvincibilityEnd();
+        Debug.Log(1);
     }
 
     public void Dungeon1Exit()
@@ -121,21 +137,30 @@ public class UIManager : MonoBehaviour
         anim.InvincibilityEnd();
         gameManager.isCameraTransitioning1 = false;
         gameManager.isDungeon1 = false;
+        gameManager.Dungeon1_Object.SetActive(false);
         Debug.Log(1);
     }
     public void Dungeon2Exit()
     {
+        bgLooper.ResetPositions();
         gameManager.playerTransform.position = Vector3.zero;
+        gameManager.playerTransform.rotation = Quaternion.identity;
+        gameManager.isDungeon2PositionSet = false;
         gameManager.isGameStart2 = false;
         dungeon2Btn.SetActive(false);
         timeText.gameObject.SetActive(false);
         timer = 0f;
         timeText.text = string.Format("{0:00} : {1:00}", timer, timer);
+        gameChat.SetActive(false);
 
         PlayerController player = gameManager.Player.GetComponent<PlayerController>();
         player.isDead = false;
+        player.rigid.gravityScale = 0f;
         AnimationHandler anim = gameManager.Player.GetComponent<AnimationHandler>();
         anim.InvincibilityEnd();
         gameManager.isCameraTransitioning2 = false;
+        gameManager.isDungeon2 = false;
+        gameManager.Dungeon2_Object.SetActive(false);
+        Debug.Log(1);
     }
 }

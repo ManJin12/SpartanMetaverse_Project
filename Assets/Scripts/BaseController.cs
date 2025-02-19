@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseController : MonoBehaviour
 {
     private GameManager gameManager;
-    protected Rigidbody2D rigid;
+    public Rigidbody2D rigid;
     [SerializeField] private SpriteRenderer CharacterRenderer;
     [SerializeField] private Transform weaponPivot;
 
@@ -48,7 +49,8 @@ public class BaseController : MonoBehaviour
 
         if (gameManager.isDungeon2 )
         {
-            if(gameManager.isGameStart2)
+            CharacterRenderer.flipX = false;
+            if (gameManager.isGameStart2)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {

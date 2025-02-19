@@ -24555,6 +24555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdaa1b678aa36aa4097cf07150ca3770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
   CharacterRenderer: {fileID: 775706096}
   weaponPivot: {fileID: 1316233317}
   health: 100

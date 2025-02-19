@@ -8,6 +8,7 @@ TagManager:
   - Door
   - BackGrund
   - Bomb
+  - Obstacle
   layers:
   - Default
   - TransparentFX

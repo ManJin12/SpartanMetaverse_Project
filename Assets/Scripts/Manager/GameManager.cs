@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     public bool isCameraTransitioning1 = false;
     public bool isCameraTransitioning2 = false;
+    public bool isDungeon2PositionSet = false;
 
     public bool isGameStart1 = false;
     public bool isGameStart2 = false;

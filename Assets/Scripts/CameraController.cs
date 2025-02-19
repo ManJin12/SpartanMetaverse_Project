@@ -17,9 +17,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     private Vector3 Dungeon2Transform;
-    private bool isDungeon2PositionSet = false;
 
-
+    
 
 
     private void Awake()
@@ -54,11 +53,11 @@ public class CameraController : MonoBehaviour
 
     public void Dungeon2Move()
     {
-        if (!isDungeon2PositionSet)
+        if (!gameManager.isDungeon2PositionSet)
         {
             transform.position = Dungeon2Transform;
             gameManager.offsetX = transform.position.x - Target.position.x;
-            isDungeon2PositionSet = true;
+            gameManager.isDungeon2PositionSet = true;
         }
         else
         {

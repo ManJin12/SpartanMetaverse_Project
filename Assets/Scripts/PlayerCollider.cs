@@ -41,7 +41,7 @@ public class PlayerCollider : MonoBehaviour
             uiManager.dungeon1Btn.SetActive(true);
             uiManager.timeText.gameObject.SetActive(true);
             uiManager.gameChat.SetActive(true);
-            uiManager.gameChatText.text = "폭탄 피하기 게임입니다. \nStart를 누르면 시작하고, Exit를 누르면 돌아갑니다.";
+            uiManager.gameChatText.text = "폭탄 피하기 게임입니다 상하좌우로 움직이세요. \nStart를 누르면 시작하고, Exit를 누르면 돌아갑니다.";
         }
 
         if (collision.gameObject.name == "Dungeon_2_DoorCollision")
@@ -52,10 +52,22 @@ public class PlayerCollider : MonoBehaviour
             gameManager.Dungeon2_Object.SetActive(true);
             gameManager.isCameraTransitioning2 = true;
             gameManager.isDungeon2 = true;
-            rigid.gravityScale = 1;
             bgLooper.SetActive(true);
+            bgLooper.GetComponent<BgLooper>().StartPositions();
             uiManager.dungeon2Btn.SetActive(true);
             uiManager.timeText.gameObject.SetActive(true);
+            uiManager.gameChat.SetActive(true);
+            uiManager.gameChatText.text = "장애물 피하기 게임입니다. SpaceBar로 점프하세요. \nStart를 누르면 시작하고, Exit를 누르면 돌아갑니다.";
+        }
+
+        if(collision.gameObject.CompareTag("Obstacle"))
+        {
+            animationHandler.Damage();
+            player.isDead = true;
+            gameManager.isGameStart2 = false;
+            uiManager.dungeon2Btn.SetActive(true);
+            uiManager.gameChat.SetActive(true);
+            uiManager.gameChatText.text = uiManager.maxGame2TimeTxt + ", 기록 달성!";
         }
     }
 
@@ -63,10 +75,18 @@ public class PlayerCollider : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Door"))
         {
-            isNearDoor = true;
+            if (collision.gameObject.name == "Dungeon_1_DoorOpenCollision")
+            {
+                uiManager.mainChat.SetActive(true);
+                uiManager.mainChatText.text = "폭탄 피하기 게임입니다. \nSpace Bar를 눌러 문을 열고 닫습니다.";
+            }
+            else if (collision.gameObject.name == "Dungeon_2_DoorOpenCollision")
+            {
+                uiManager.mainChat.SetActive(true);
+                uiManager.mainChatText.text = "장애물 피하기 게임입니다.. \nSpace Bar를 눌러 문을 열고 닫습니다.";
+            }
 
-            uiManager.mainChat.SetActive(true);
-            uiManager.mainChatText.text = "폭탄 피하기 게임입니다. \nSpace Bar를 눌러 문을 열고 닫습니다.";
+            isNearDoor = true;
 
             // 감지한 "DoorTrigger"에서 열린 문과 닫힌 문을 찾아야 함
             DoorTrigger triggerScript = collision.GetComponent<DoorTrigger>();
@@ -77,6 +97,7 @@ public class PlayerCollider : MonoBehaviour
                 Debug.Log($"문 감지: {currentOpenDoor.name}");
             }
         }
+
 
         if (collision.gameObject.CompareTag("Bomb"))
         {

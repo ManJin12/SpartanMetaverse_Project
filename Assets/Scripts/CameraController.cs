@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
     GameManager gameManager;
+    CameraManager cameraManager;
     [SerializeField]
     private Transform Target;
 
@@ -14,13 +16,18 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Vector3 Dungeon1Transform;
 
+    [SerializeField]
+    private Vector3 Dungeon2Transform;
+
+
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
 
     }
 
-    public void CameraMoving()
+    public void MainCameraMoving()
     {
         Vector3 camPosition = new Vector3(Target.transform.position.x, Target.transform.position.y, transform.position.z);
         Vector3 camPositionX = transform.position;
@@ -37,19 +44,37 @@ public class CameraController : MonoBehaviour
         }
 
         transform.position = new Vector3(camPositionX.x, camPositionY.y, transform.position.z);
+    }
 
+    public void Dungeon1Move()
+    {
+        transform.position = Dungeon1Transform;
+    }
+
+    public void Dungeon2Move()
+    {
+        transform.position = Dungeon2Transform;
+        GameManager.Instance.offsetX = transform.position.x - Target.position.x;
+
+        Vector3 pos = transform.position;
+        pos.x = Target.position.x + GameManager.Instance.offsetX;
+        transform.position = pos;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.isCameraTransitioning)
+        if (!GameManager.Instance.isCameraTransitioning1 && !GameManager.Instance.isCameraTransitioning2)
         {
-            CameraMoving();
+            MainCameraMoving();
         }
-        else
+        else if(GameManager.Instance.isCameraTransitioning1)
         {
-            transform.position = Dungeon1Transform; 
+            Dungeon1Move();
+        }
+        else if(GameManager.Instance.isCameraTransitioning2)
+        {
+            Dungeon2Move();
         }
     }
 }

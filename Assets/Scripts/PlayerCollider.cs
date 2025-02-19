@@ -28,7 +28,7 @@ public class PlayerCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Door"))  //  g
+        if (collision.gameObject.CompareTag("Door"))
         {
             isNearDoor = true;
             Debug.Log(1);

@@ -13,6 +13,8 @@ public class PlayerCollider : MonoBehaviour
 
     Rigidbody2D rigid;
 
+    public GameObject bgLooper;
+
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -34,6 +36,7 @@ public class PlayerCollider : MonoBehaviour
             gameManager.isCameraTransitioning2 = true;
             gameManager.isDungeon2 = true;
             rigid.gravityScale = 1;
+            bgLooper.SetActive(true);
         }
     }
 

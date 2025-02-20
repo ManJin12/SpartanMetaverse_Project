@@ -9586,7 +9586,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 737f7aca46e1282458b0cc09edd49044, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -24850,7 +24850,6 @@ GameObject:
   - component: {fileID: 1070020398}
   - component: {fileID: 1070020401}
   - component: {fileID: 1070020402}
-  - component: {fileID: 1070020403}
   - component: {fileID: 1070020404}
   m_Layer: 0
   m_Name: Player
@@ -24985,18 +24984,6 @@ MonoBehaviour:
   ObstacleSpawner: {fileID: 777642386}
   bgLooper: {fileID: 1334330879}
   player: {fileID: 1070020401}
---- !u!114 &1070020403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1070020397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f272ca0d0404704aad441521e4e1cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1070020404
 MonoBehaviour:
   m_ObjectHideFlags: 0

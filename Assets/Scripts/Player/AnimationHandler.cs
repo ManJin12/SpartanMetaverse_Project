@@ -9,7 +9,7 @@ public class AnimationHandler : MonoBehaviour
 
     protected Animator[] animators;
 
-    protected virtual void Awake()
+    private void Awake()
     {
         animators = GetComponentsInChildren<Animator>(true); // true 옵션을 추가해서 비활성화된 오브젝트도 검색
     }

@@ -7,6 +7,7 @@ public class BaseController : MonoBehaviour
 {
     private GameManager gameManager;
     public Rigidbody2D rigid;
+
     [SerializeField] public SpriteRenderer KnightRenderer;
     [SerializeField] public SpriteRenderer ElfRenderer;
     [SerializeField] private Transform weaponPivot;
@@ -35,10 +36,9 @@ public class BaseController : MonoBehaviour
     }
     protected virtual void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
         if (isDead)

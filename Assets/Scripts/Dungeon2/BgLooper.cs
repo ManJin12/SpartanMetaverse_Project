@@ -11,11 +11,6 @@ public class BgLooper : MonoBehaviour
 
     private Dictionary<GameObject, Vector3> originalPositions = new Dictionary<GameObject, Vector3>();
 
-    void Start()
-    {
-        
-    }
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("BackGrund"))

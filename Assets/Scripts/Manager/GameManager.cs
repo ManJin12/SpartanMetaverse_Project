@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CharacterType
+{
+    Knight,
+    Elf,
+    Human
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -16,6 +23,8 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+
+    public CharacterType currentCharacter;
 
     public Transform playerTransform;
     public GameObject Player;
@@ -36,11 +45,16 @@ public class GameManager : MonoBehaviour
     public bool isGameStart1 = false;
     public bool isGameStart2 = false;
 
+    public bool isKnight = false;
+    public bool isElf = false;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
+
+        currentCharacter = CharacterType.Knight;
     }
 }

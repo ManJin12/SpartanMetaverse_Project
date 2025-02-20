@@ -9,6 +9,7 @@ TagManager:
   - BackGrund
   - Bomb
   - Obstacle
+  - Angel
   layers:
   - Default
   - TransparentFX

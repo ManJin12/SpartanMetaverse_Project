@@ -24,10 +24,10 @@ public class UIManager : MonoBehaviour
     public string maxGame1TimeTxt;
     public string maxGame2TimeTxt;
 
-
-    
     public GameObject dungeon1Btn;
     public GameObject dungeon2Btn;
+
+    public GameObject CharacterBtn;
 
     private void Awake()
     {
@@ -162,5 +162,34 @@ public class UIManager : MonoBehaviour
         gameManager.isDungeon2 = false;
         gameManager.Dungeon2_Object.SetActive(false);
         Debug.Log(1);
+    }
+
+    public void CharacterChange(CharacterType newCharacter)
+    {
+        BaseController character = gameManager.Player.GetComponent<BaseController>();
+
+        GameObject[] characters = {character.KnightRenderer.gameObject, character.ElfRenderer.gameObject};
+
+        foreach (GameObject obj in characters)
+        {
+            obj.SetActive(false);
+        }
+
+        characters[(int)newCharacter].SetActive(true);
+        gameManager.currentCharacter = newCharacter;
+    }
+
+    public void SelectElf()
+    {
+        CharacterChange(CharacterType.Elf);
+        gameManager.isElf = true;
+        gameManager.isKnight = false;
+    }
+
+    public void SelectKnight()
+    {
+        CharacterChange(CharacterType.Knight);
+        gameManager.isElf = false;
+        gameManager.isKnight = true;
     }
 }

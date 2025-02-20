@@ -7,7 +7,8 @@ public class BaseController : MonoBehaviour
 {
     private GameManager gameManager;
     public Rigidbody2D rigid;
-    [SerializeField] private SpriteRenderer CharacterRenderer;
+    [SerializeField] public SpriteRenderer KnightRenderer;
+    [SerializeField] public SpriteRenderer ElfRenderer;
     [SerializeField] private Transform weaponPivot;
 
     [SerializeField] public int health = 100;
@@ -49,7 +50,15 @@ public class BaseController : MonoBehaviour
 
         if (gameManager.isDungeon2 )
         {
-            CharacterRenderer.flipX = false;
+            if (gameManager.isKnight)
+            {
+                KnightRenderer.flipX = false;
+            }
+            else if (gameManager.isElf)
+            {
+                ElfRenderer.flipX = false;
+            }
+
             if (gameManager.isGameStart2)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -99,7 +108,14 @@ public class BaseController : MonoBehaviour
         float rot = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(rot) > 90f;
 
-        CharacterRenderer.flipX = isLeft;
+        if (gameManager.isKnight)
+        {
+            KnightRenderer.flipX = isLeft;
+        }
+        if (gameManager.isElf)
+        {
+            ElfRenderer.flipX = isLeft;
+        }
 
     }
 

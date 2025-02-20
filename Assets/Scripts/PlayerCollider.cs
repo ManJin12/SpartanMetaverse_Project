@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerCollider : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerCollider : MonoBehaviour
     private GameObject currentClosedDoor; // 현재 닫힌 문 오브젝트
     private bool isNearDoor = false; // 문 근처 여부
     private bool isOpenDoor = false; // 문 상태 (열림/닫힘)
+
+    private bool isAngel = false;
 
     public ObstacleSpawner ObstacleSpawner;
     Rigidbody2D rigid;
@@ -109,6 +112,13 @@ public class PlayerCollider : MonoBehaviour
             uiManager.gameChatText.text = uiManager.maxGame1TimeTxt + ", 기록 달성!";
             ObstacleSpawner.RemoveAllChildren();
         }
+
+        if (collision.gameObject.CompareTag("Angel"))
+        {
+            isAngel = true;
+            uiManager.mainChat.SetActive(true);
+            uiManager.mainChatText.text = "NPC : 천사 - 캐릭터 변경\n 스페이스바를 눌러 캐릭터를 변경할 수 있어요";
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -120,6 +130,13 @@ public class PlayerCollider : MonoBehaviour
             currentClosedDoor = null; // 닫힌 문 정보 초기화
             uiManager.mainChat.SetActive(false);
         }
+
+        if (collision.gameObject.CompareTag("Angel"))
+        {
+            isAngel = false;
+            uiManager.mainChat.SetActive(false);
+            uiManager.CharacterBtn.SetActive(false);
+        }     
     }
 
     private void Update()
@@ -142,6 +159,20 @@ public class PlayerCollider : MonoBehaviour
                 Debug.LogWarning("OpenDoor 또는 ClosedDoor 오브젝트를 찾을 수 없음!");
             }
 
+        }
+
+        if(isAngel && Input.GetButtonDown("Jump"))
+        {
+            if (uiManager.CharacterBtn.activeSelf == false)
+            {
+                uiManager.mainChat.SetActive(false);
+                uiManager.CharacterBtn.SetActive(true);
+            }
+            else
+            {
+                uiManager.mainChat.SetActive(true);
+                uiManager.CharacterBtn.SetActive(false);
+            }
         }
     }
 }
